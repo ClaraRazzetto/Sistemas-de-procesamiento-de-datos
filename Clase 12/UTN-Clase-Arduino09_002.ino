@@ -8,6 +8,7 @@ int triggerPin = 7;
 int echoPin = 7;
 float distancia = 0;
 int lectura = 0;
+int anterior = 0;
 
 void setup()
 {
@@ -38,8 +39,11 @@ void loop()
 { 
   lcd.setCursor(0,1);
   lectura = readUltrasonicDistance(triggerPin,echoPin);
-  distancia = 0.01723 * lectura;
-  lcd.print(distancia);
+  if (lectura != anterior){
+   distancia = 0.01723 * lectura;
+   lcd.print(distancia);
+   anterior = lectura;
+  }
   delay(100);
 }
 
